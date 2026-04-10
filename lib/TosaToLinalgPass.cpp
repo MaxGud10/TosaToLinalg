@@ -27,7 +27,7 @@ struct TosaToLinalgPass : public PassWrapper<TosaToLinalgPass, OperationPass<Mod
         return "Lower a small subset of TOSA ops to Linalg-on-tensors";
     }
 
-    void getDependentDialects(DialectRegistry &registry) const override
+    void getDependentDialects(DialectRegistry &registry) const override 
     {
         registry.insert<arith ::ArithDialect,
                         func  ::FuncDialect,
@@ -42,8 +42,7 @@ struct TosaToLinalgPass : public PassWrapper<TosaToLinalgPass, OperationPass<Mod
 
         ConversionTarget target(ctx);
 
-        // Всё TOSA легально, кроме тех ops, которые мы целенаправленно lowering'им.
-        target.addLegalDialect<tosa::TosaDialect>();
+        target.addLegalDialect<tosa  ::TosaDialect>();
         target.addLegalDialect<arith ::ArithDialect,  func  ::FuncDialect,
                                linalg::LinalgDialect, tensor::TensorDialect>();
         target.addLegalOp<ModuleOp>();
